@@ -1,0 +1,33 @@
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class testE2EAssignment 
+{
+	public static void main(String[] args) 
+	{
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\phoph\\Selenium-workspace\\chromedriver.exe");
+        WebDriver driver=new ChromeDriver();
+        driver.get("http://qaclickacademy.com/practice.php");
+        System.out.println(driver.getTitle());
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        
+        WebElement checkBox=driver.findElement(By.xpath("//input[@id='checkBoxOption1']"));
+        checkBox.click();
+        String capturedOption=checkBox.getAttribute("value");
+        System.out.println(capturedOption);
+        
+        Select option=new Select(driver.findElement(By.id("dropdown-class-example")));
+        option.selectByValue(capturedOption);
+        
+        //driver.quit();
+	}
+}

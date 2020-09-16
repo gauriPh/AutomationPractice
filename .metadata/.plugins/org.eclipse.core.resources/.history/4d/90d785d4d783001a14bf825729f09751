@@ -1,0 +1,36 @@
+import java.util.Arrays;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+public class ShoppingCart {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\phoph\\Selenium-workspace\\chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://rahulshettyacademy.com/seleniumPractise/");
+		System.out.println(driver.getTitle());
+		driver.manage().window().maximize();
+		List<WebElement> productList=driver.findElements(By.className("product-name"));
+	    String[] requiredProducts= {"Cucumber","Brocolli"};
+	    List requiredProductNames=Arrays.asList(requiredProducts);
+	    
+        
+		for(int i=0; i<productList.size();i++)
+		{
+			String currentProductFullName=productList.get(i).getText();
+			String[] currentProductName=currentProductFullName.split(" ");
+			System.out.println(currentProductName[0]);
+			if(requiredProductNames.contains(currentProductName[0]))
+				driver.findElements(By.xpath("//button[text()='ADD TO CART']")).get(i).click();
+				
+		}
+		//driver.quit();
+	}
+
+}

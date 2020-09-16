@@ -1,0 +1,36 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class MakeMyTrip
+{
+  public static void main(String[] args) throws InterruptedException
+  {
+	  System.setProperty("webdriver.chrome.driver","C:\\Users\\phoph\\Selenium-workspace\\chromedriver.exe");
+		WebDriver driver=new ChromeDriver();
+		driver.get("https://www.makemytrip.com/");
+		System.out.println(driver.getTitle());
+		driver.manage().window().maximize();
+		WebElement FromCity = driver.findElement(By.xpath("//input[@placeholder='To']"));
+		FromCity.click();
+		FromCity.sendKeys("MUMBAI");
+		Thread.sleep(2000L);
+		FromCity.sendKeys(Keys.ARROW_DOWN);
+		Thread.sleep(2000L);
+		FromCity.sendKeys(Keys.ENTER);
+		System.out.println("From City Selected");
+
+		WebElement ToCity = driver.findElement(By.xpath("//input[@id='toCity']"));
+		ToCity.click();
+		ToCity.sendKeys("VANCOUVER");
+		Thread.sleep(2000L);
+		ToCity.sendKeys(Keys.ARROW_DOWN);
+		System.out.println("To City Selected");
+		Thread.sleep(2000L);
+		ToCity.sendKeys(Keys.ENTER);
+		driver.quit();
+	}
+
+}
